@@ -1,0 +1,15 @@
+Kompilowanie z biblioteką statyczną:
+
+gcc -c stringLibrary.c
+ar cr libstringLibrary.a stringLibrary.o
+gcc -o main main.c -L. -lstringLibrary
+
+Kompilowanie z biblioteką dynamiczną:
+
+gcc -fPIC -c stringLibrary.c
+gcc -shared -fPIC -o libstringLibrary.so stringLibrary.o
+gcc -o main main.c -L. -lstringLibrary
+
+(często nie można wtedy dalej wywołać maina, w takim przypadku należy zmodyfikować zmienną globalną:
+export LD_LIBRARY_PATH=/home/kappa/Github/ścieżka_do_dynamicznej biblioteki)
+
