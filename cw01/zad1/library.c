@@ -16,16 +16,25 @@ chars_pointer* init(int n){
     return memory_block;
 }
 
-void count_file(chars_pointer* memoryBlocks, char* file_name){
+void count_file(chars_pointer* memory_block, char* file_name){
     char buffer[200];
-    sprintf(buffer, "wc %s > /tmp/test_file.txt", file_name);
+    sprintf(buffer, "wc %s > /tmp/wc_tmp_file.txt", file_name);
     system(buffer);
-    system("stat /tmp/test_file.txt -c \"%s\" > /tmp/gituwa.txt");
+    system("stat /tmp/wc_tmp_file.txt -c \"%s\" > /tmp/wc_tmp_file_size.txt");
+
+    FIle
+
+
+    memory_block->array[memory_block->size]= (int*)malloc(sizeof(int));
+
+    system("rm /tmp/wc_tmp_file.txt");
+    system("rm /tmp/wc_tmp_file_size.txt");
 }
 
 // sprintf
-int* show_index(chars_pointer * memory ,int n) {
-    return memory->array[n];
+void show_index(chars_pointer * memory ,int n) {
+//    printf();
+//    memory->array[n];
 }
 
 
