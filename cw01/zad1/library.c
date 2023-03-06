@@ -1,11 +1,29 @@
-#include "library.h"
-
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-void printMessage() {
-    printf("Hello, World!\n");
+
+typedef struct memoryBlocks {
+    int *array;
+    int maxSize;
+    int size;
+} memoryBlocks;
+
+
+memoryBlocks* init(int n){
+    memoryBlocks* mem = (memoryBlocks *)malloc(sizeof(memoryBlocks));
+    mem->array = (int*)calloc(sizeof(int)*)
+
+    return mem;
 }
 
-void printNumbers(){
-    printf("1, 2, 3, 4, 5\n");
+
+
+int main() {
+
+
+
+
+
+    return 0;
 }
