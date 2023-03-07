@@ -45,7 +45,6 @@ int main(){
     while( query_number<INT_MAX && !exit_program ){
 
         printf("In [%d]: ", query_number++);
-        fflush(NULL);
         fgets(query,QUERY_LENGTH,stdin);
         word = strtok(query, " ");
 
@@ -71,7 +70,10 @@ int main(){
             if( word_counter != 2){
                 error(word_counter,2);
             }
-            count(memory_blocks,words[1]);
+            char* file_name = (char*) malloc(sizeof(char)*(strlen(words[1]))-1);
+            memcpy(file_name,words[1],strlen(words[1])-1);
+            count(memory_blocks,file_name);
+            free(file_name);
         }
 
         else if( strcmp(words[0],"show\n") == 0 || strcmp(words[0],"show") == 0){

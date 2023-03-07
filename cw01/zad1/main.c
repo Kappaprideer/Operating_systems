@@ -5,7 +5,7 @@
 int main() {
     chars_pointer* mem = init(10);
     count(mem, "/home/endrew/Github/Operating_systems/cw01/zad1/files/nowe.txt" );
-    printf("%s \n", show(mem, 0));
+//    printf("%s \n", show(mem, 0));
 //    count(mem, "/home/endrew/Github/Operating_systems/cw01/zad1/files/dwa.txt" );
 //    printf("%s" "%c", show(mem, 1), '\n');
 //    count(mem, "/home/endrew/Github/Operating_systems/cw01/zad1/files/trzy.txt" );
