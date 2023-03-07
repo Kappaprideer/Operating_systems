@@ -9,16 +9,17 @@ typedef struct chars_pointer {
 } chars_pointer;
 
 chars_pointer* init(int n){
-    chars_pointer* memory_block = (chars_pointer*)malloc(sizeof(chars_pointer));
+    chars_pointer* memory_block = (chars_pointer*) malloc(sizeof(chars_pointer));
     memory_block->array = (char **) calloc(n, sizeof(char *));
     memory_block->max_size =n;
     memory_block->size=0;
     return memory_block;
 }
 
+// usuwanie EXITA !!!!!
 void check_if_file_exist(FILE* f){
     if(f == NULL){
-        printf("File not found! \n");
+        fprintf(stderr, "File not found! \n");
         exit(1);
     }
 }
@@ -34,18 +35,22 @@ int get_file_size(char* file_name){
     return size;
 }
 
-void count_file(chars_pointer* memory_block, char* file_name){
-    if(memory_block->size >= memory_block->max_size)
-        printf("You can not count another file, array is full! \n");
+void count(chars_pointer* memory_block, char* file_name){
+    if(memory_block == NULL){
+        fprintf(stderr, "You have to initalize structure first!\n");
+    }
+    else if(memory_block->size >= memory_block->max_size)
+        fprintf(stderr, "You can not count another file, array is full! \n");
     else {
         int empty_cell_index=0;
         while(empty_cell_index < memory_block->max_size && memory_block->array[empty_cell_index] != NULL){
             empty_cell_index++;
         }
 
-        char buffer[200];
+        char* buffer = (char*) calloc(sizeof(char),strlen(file_name)+26);
         sprintf(buffer, "wc %s > /tmp/wc_tmp_file.txt", file_name);
         system(buffer);
+        free(buffer);
 
         int file_size = get_file_size("/tmp/wc_tmp_file.txt");
         memory_block->array[empty_cell_index] = (char*) malloc(sizeof(char) * file_size);
@@ -56,15 +61,15 @@ void count_file(chars_pointer* memory_block, char* file_name){
         fgets(memory_block->array[empty_cell_index], file_size, wc_file);
         fclose(wc_file);
 
-        system("rm /tmp/wc_tmp_file.txt");
+//        system("rm /tmp/wc_tmp_file.txt");
 
         memory_block->size++;
     }
 }
 
-char* show_index(chars_pointer * memory_blocks ,int n) {
+char* show(chars_pointer * memory_blocks ,int n) {
     if (n >= memory_blocks->max_size || memory_blocks->array[n] == 0) {
-        printf("Wrong index! \n");
+        fprintf(stderr, "Wrong index! \n");
         return "";
     }
     else {
@@ -72,7 +77,7 @@ char* show_index(chars_pointer * memory_blocks ,int n) {
     }
 }
 
-void delete_index(chars_pointer* memory_block, int index){
+void delete(chars_pointer* memory_block, int index){
     if(index > memory_block->size)
         printf("Index is bigger than array size! \n");
     else if(memory_block->array[index] == 0){

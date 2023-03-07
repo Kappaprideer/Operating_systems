@@ -3,9 +3,9 @@
 
 typedef struct chars_pointer{} chars_pointer;
 chars_pointer* init(int n);
-void count_file(chars_pointer*, char*);
-char* show_index(chars_pointer*, int);
-void delete_index(chars_pointer*, int);
+void count(chars_pointer*, char*);
+char* show(chars_pointer*, int);
+void delete(chars_pointer*, int);
 void destroy(chars_pointer*);
 
 
