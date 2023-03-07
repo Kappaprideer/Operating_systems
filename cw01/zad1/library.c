@@ -68,7 +68,6 @@ char* show_index(chars_pointer * memory_blocks ,int n) {
         return "";
     }
     else {
-        printf("%s %c", memory_blocks->array[n], '\n');
         return memory_blocks->array[n];
     }
 }

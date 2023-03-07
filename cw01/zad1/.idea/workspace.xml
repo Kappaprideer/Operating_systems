@@ -20,7 +20,28 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="992d590d-7549-4a0f-a0c6-189010190547" name="Changes" comment="" />
+    <list default="true" id="992d590d-7549-4a0f-a0c6-189010190547" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-8ed29a55c35bc5e21947.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-ca6537fa5ca872418728.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-03-07T11-31-04-0055.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-03-07T17-04-07-0229.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-zad1-Debug-9216c4d94ea9da545e31.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-zad1-Debug-7630e5da16e0fecbacf2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/zad1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/zad1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cztery.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/cztery.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dwa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/dwa.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib" beforeDir="false" afterPath="$PROJECT_DIR$/main" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library.c" beforeDir="false" afterPath="$PROJECT_DIR$/library.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nowe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/nowe.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trzy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/trzy.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab_1/zad2/dodawanieBiblioteki" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab_1/zad2/dodawanieBiblioteki" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,9 +89,9 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="zad1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zad1" TARGET_NAME="zad1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="zad1" RUN_TARGET_NAME="zad1">
@@ -91,6 +112,7 @@
       <workItem from="1678133702927" duration="5493000" />
       <workItem from="1678174233793" duration="5385000" />
       <workItem from="1678186603655" duration="6468000" />
+      <workItem from="1678207256681" duration="3286000" />
     </task>
     <servers />
   </component>

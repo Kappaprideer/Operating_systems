@@ -49,20 +49,14 @@ cmake_ninja_workdir = /home/endrew/Github/Operating_systems/cw01/zad1/cmake-buil
 
 build cmake_object_order_depends_target_zad1: phony || CMakeFiles/zad1.dir
 
-build CMakeFiles/zad1.dir/library.c.o: C_COMPILER__zad1_Debug /home/endrew/Github/Operating_systems/cw01/zad1/library.c || cmake_object_order_depends_target_zad1
-  DEP_FILE = CMakeFiles/zad1.dir/library.c.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/zad1.dir
-  OBJECT_FILE_DIR = CMakeFiles/zad1.dir
-
-build CMakeFiles/zad1.dir/zad1lib.c.o: C_COMPILER__zad1_Debug /home/endrew/Github/Operating_systems/cw01/zad1/zad1lib.c || cmake_object_order_depends_target_zad1
-  DEP_FILE = CMakeFiles/zad1.dir/zad1lib.c.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/zad1.dir
-  OBJECT_FILE_DIR = CMakeFiles/zad1.dir
-
 build CMakeFiles/zad1.dir/main.c.o: C_COMPILER__zad1_Debug /home/endrew/Github/Operating_systems/cw01/zad1/main.c || cmake_object_order_depends_target_zad1
   DEP_FILE = CMakeFiles/zad1.dir/main.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/zad1.dir
+  OBJECT_FILE_DIR = CMakeFiles/zad1.dir
+
+build CMakeFiles/zad1.dir/library.c.o: C_COMPILER__zad1_Debug /home/endrew/Github/Operating_systems/cw01/zad1/library.c || cmake_object_order_depends_target_zad1
+  DEP_FILE = CMakeFiles/zad1.dir/library.c.o.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/zad1.dir
   OBJECT_FILE_DIR = CMakeFiles/zad1.dir
@@ -75,7 +69,7 @@ build CMakeFiles/zad1.dir/main.c.o: C_COMPILER__zad1_Debug /home/endrew/Github/O
 #############################################
 # Link the executable zad1
 
-build zad1: C_EXECUTABLE_LINKER__zad1_Debug CMakeFiles/zad1.dir/library.c.o CMakeFiles/zad1.dir/zad1lib.c.o CMakeFiles/zad1.dir/main.c.o
+build zad1: C_EXECUTABLE_LINKER__zad1_Debug CMakeFiles/zad1.dir/main.c.o CMakeFiles/zad1.dir/library.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/zad1.dir
   POST_BUILD = :
