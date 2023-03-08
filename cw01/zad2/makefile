@@ -15,3 +15,12 @@ clean:
 
 set_path:
 	export LD_LIBRARY_PATH="/home/endrew/Github/Operating_systems/cw01/zad2"
+
+
+test:
+	@make static
+	@./main < ./test/cos > ./result/wyniki.txt
+
+
+
+#zczyztywanie zmiennej w makefile

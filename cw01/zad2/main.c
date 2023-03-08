@@ -5,8 +5,13 @@
 #include <time.h>
 #include <sys/times.h>
 #include <unistd.h>
-#include "../zad1/library.h"
-#include "dllmana.h"
+
+#ifdef DYNAMIC
+    #include "lib_dynamiclibrary.h"
+#else
+    #include "library.h"
+#endif
+
 
 const int QUERY_LENGTH = 100;
 const int MAX_WORDS = 3;
@@ -21,13 +26,21 @@ void end_time_measure(){
     printf("USER TIME: %ld tics \n", tms_end.tms_cutime - tms_start.tms_cutime );
     printf("SYST TIME: %ld tics \n", tms_end.tms_cstime - tms_start.tms_cstime );
 }
-
-
 void error(int numberGivenWords, int numberExpectedWords){
     fprintf(stderr,"Wrong number of arguments!\nYou gave %d instead of %d expected.\n",numberGivenWords,numberExpectedWords);
 }
 
 int main(){
+
+    #ifdef DYNAMIC
+        ret = init_dynamic_handler();
+
+        if (SUCCESS != ret)
+        {
+            return FAILURE;
+        }
+    #endif
+
     int query_number = 0;
     int exit_program = 0;
     char **words = (char**) malloc(sizeof(char*)*MAX_WORDS);
@@ -116,4 +129,10 @@ int main(){
     }
     free(words);
     free(query);
+    
+   	#ifdef DYNAMIC
+        free_handler_memory();
+    #endif
+
+    return 0;
 }
