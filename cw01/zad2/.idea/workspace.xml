@@ -22,16 +22,13 @@
   <component name="ChangeListManager">
     <list default="true" id="aaca87e0-18c6-457d-bf04-c91164d5745a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../zad1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../zad1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zad1/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../zad1/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zad1/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../zad1/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zad1/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../zad1/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zad1/cmake-build-debug/zad1" beforeDir="false" afterPath="$PROJECT_DIR$/../zad1/cmake-build-debug/zad1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../zad1/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../zad1/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zad1/library.c" beforeDir="false" afterPath="$PROJECT_DIR$/../zad1/library.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/zad2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/zad2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main" beforeDir="false" afterPath="$PROJECT_DIR$/main" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,19 +61,20 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/endrew/Github/Operating_systems/cw01/zad1",
+    "last_opened_file_path": "/home/endrew/Github/Operating_systems/cw01",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="zad2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zad2" TARGET_NAME="zad2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="zad2" RUN_TARGET_NAME="zad2">
@@ -94,7 +92,8 @@
       <option name="presentableId" value="Default" />
       <updated>1678211030972</updated>
       <workItem from="1678211032282" duration="389000" />
-      <workItem from="1678211755406" duration="16099000" />
+      <workItem from="1678211755406" duration="18070000" />
+      <workItem from="1678265435658" duration="4424000" />
     </task>
     <servers />
   </component>

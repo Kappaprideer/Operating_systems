@@ -67,8 +67,13 @@ void count(chars_pointer* memory_block, char* file_name){
     }
 }
 
+
 char* show(chars_pointer * memory_blocks ,int n) {
-    if (n >= memory_blocks->max_size || memory_blocks->array[n] == 0) {
+    if(memory_blocks == NULL){
+        fprintf(stderr, "Structure is not initalized!\n");
+        return "";
+    }
+    else if (n >= memory_blocks->max_size || memory_blocks->array[n] == 0) {
         fprintf(stderr, "Wrong index! \n");
         return "";
     }
@@ -78,10 +83,13 @@ char* show(chars_pointer * memory_blocks ,int n) {
 }
 
 void delete(chars_pointer* memory_block, int index){
-    if(index > memory_block->size)
-        printf("Index is bigger than array size! \n");
+    if(memory_block == NULL){
+        fprintf(stderr, "Structure is not initialized! \n");
+    }
+    else if(index > memory_block->size)
+        fprintf(stderr, "Index is bigger than array size! \n");
     else if(memory_block->array[index] == 0){
-        printf("Array is already empty at index: %d \n", index);
+        fprintf(stderr, "Array is already empty at index: %d \n", index);
     }
     else{
     memory_block->size--;
@@ -91,9 +99,14 @@ void delete(chars_pointer* memory_block, int index){
 }
 
 void destroy(chars_pointer * memory_blocks){
-    for(int i=0; i<memory_blocks->size; i++){
-        free(memory_blocks->array[i]);
-        memory_blocks->array[i]=0;
+    if(memory_blocks == NULL){
+        fprintf(stderr, "Structure is not initialized! \n");
     }
-    memory_blocks->size=0;
+    else{
+        for(int i=0; i<memory_blocks->size; i++){
+            free(memory_blocks->array[i]);
+            memory_blocks->array[i]=0;
+        }
+        memory_blocks->size=0;
+    }
 }

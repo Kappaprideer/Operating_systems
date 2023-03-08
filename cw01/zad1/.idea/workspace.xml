@@ -22,11 +22,6 @@
   <component name="ChangeListManager">
     <list default="true" id="992d590d-7549-4a0f-a0c6-189010190547" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/zad1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/zad1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../zad2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../zad2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../zad2/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../zad2/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../zad2/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../zad2/cmake-build-debug/.ninja_log" afterDir="false" />
