@@ -2,6 +2,7 @@ CC = gcc
 FLAGS = -Wall
 LIB_NAME = lib_one
 SHORT_LIB_NAME = _one
+#LIB_DIR = ../zad1
 SOURCE_NAME = library
 
 static_lib:
@@ -16,11 +17,11 @@ shared_lib:
 
 static:
 	make static_lib
-	$(CC) $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	$(CC) $(FLAGS) main.c -o main_static -L. -l$(SHORT_LIB_NAME)
 
 shared:
 	make shared_lib
-	$(CC) $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	$(CC) $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main_shared
 
 dynamic:
 	make shared_lib
@@ -33,23 +34,11 @@ clean_all:
 	rm -f *.so
 	rm -f *.a
 	rm -f *.o
-	rm -r main
-
-set_path:
-	export LD_LIBRARY_PATH=/home/endrew/Github/Operating_systems/cw01/zad3a/
-
-test_static:
-	make static
-	./main < ./test_files/test.txt > ./test_files/result_static.txt
-
-test_shared:
-	make shared
-	./main < ./test_files/test.txt > ./test_files/result_shared.txt
-
-test_dynamic:
-	make dynamic
-	./main < ./test_files/test.txt > ./test_files/result_dynamic.txt
+	rm -r main_shared
+	rm -r main_static
 
 all:
-	make test_static
-	make test_shared
+	make static
+	make shared
+
+
