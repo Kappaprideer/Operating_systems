@@ -61,6 +61,12 @@ build CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o: C_COMPILER__zad2_Debug /home/e
   OBJECT_DIR = CMakeFiles/zad2.dir
   OBJECT_FILE_DIR = CMakeFiles/zad2.dir
 
+build CMakeFiles/zad2.dir/library.c.o: C_COMPILER__zad2_Debug /home/endrew/Github/Operating_systems/cw01/zad2/library.c || cmake_object_order_depends_target_zad2
+  DEP_FILE = CMakeFiles/zad2.dir/library.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/zad2.dir
+  OBJECT_FILE_DIR = CMakeFiles/zad2.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target zad2
@@ -69,7 +75,7 @@ build CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o: C_COMPILER__zad2_Debug /home/e
 #############################################
 # Link the executable zad2
 
-build zad2: C_EXECUTABLE_LINKER__zad2_Debug CMakeFiles/zad2.dir/main.c.o CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o
+build zad2: C_EXECUTABLE_LINKER__zad2_Debug CMakeFiles/zad2.dir/main.c.o CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o CMakeFiles/zad2.dir/library.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/zad2.dir
   POST_BUILD = :

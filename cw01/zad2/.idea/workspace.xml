@@ -27,11 +27,8 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib_dynamiclibrary.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib_dynamiclibrary.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib_dynamiclibrary.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib_dynamiclibrary.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.c" beforeDir="false" afterPath="$PROJECT_DIR$/library.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.h" beforeDir="false" afterPath="$PROJECT_DIR$/library.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dllmana.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +60,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/endrew/Downloads/WysockiKrzysztof/cw01/zad2/Makefile",
+    "last_opened_file_path": "/home/endrew/Github/Operating_systems/lab_2/zad1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,9 +71,9 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="zad2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zad2" TARGET_NAME="zad2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="zad2" RUN_TARGET_NAME="zad2">
@@ -98,6 +95,7 @@
       <workItem from="1678265435658" duration="9306000" />
       <workItem from="1678288596943" duration="877000" />
       <workItem from="1678315676255" duration="5594000" />
+      <workItem from="1678352727366" duration="1492000" />
     </task>
     <servers />
   </component>
