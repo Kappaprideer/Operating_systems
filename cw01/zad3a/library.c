@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "library.h"
 
-typedef struct chars_pointer {
-    char** array;
-    int max_size;
-    int size;
-} chars_pointer;
+//typedef struct chars_pointer {
+//    char** array;
+//    int max_size;
+//    int size;
+//} chars_pointer;
 
-chars_pointer* init(int n){
+chars_pointer* init_pointer(int n){
     chars_pointer* memory_block = (chars_pointer*) malloc(sizeof(chars_pointer));
     memory_block->array = (char **) calloc(n, sizeof(char *));
     memory_block->max_size =n;
@@ -35,7 +36,7 @@ int get_file_size(char* file_name){
     return size;
 }
 
-void count(chars_pointer* memory_block, char* file_name){
+void count(chars_pointer* memory_block,const char* file_name){
     if(memory_block == NULL){
         fprintf(stderr, "You have to initalize structure first!\n");
     }

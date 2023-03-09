@@ -43,7 +43,7 @@ set_path:
 #
 #test:
 #	@make static
-#	@./main < ./test_files/ > ./result/wyniki.txt
+#	@./main < ./test/cos > ./result/wyniki.txt
 
 
 

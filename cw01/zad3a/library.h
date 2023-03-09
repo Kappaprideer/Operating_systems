@@ -1,12 +1,16 @@
-#ifndef ZAD1_LIBRARY_H
-#define ZAD1_LIBRARY_H
+#ifndef LIBRARY_H
+#define LIBRARY_H
 
-typedef struct chars_pointer{} chars_pointer;
-chars_pointer* init(int n);
-void count(chars_pointer*, char*);
-char* show(chars_pointer*, int);
-void delete(chars_pointer*, int);
-void destroy(chars_pointer*);
+typedef struct {
+    char** array;
+    int max_size;
+    int size;
+} chars_pointer;
 
+chars_pointer* init_pointer(int size);
+void count(chars_pointer* memory_blocks,const char* filename);
+char* show(chars_pointer* memory_blocks, int index);
+void delete(chars_pointer* memory_blocks, int index);
+void destroy(chars_pointer* memory_blocks);
 
 #endif
