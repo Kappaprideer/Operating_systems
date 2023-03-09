@@ -12,7 +12,6 @@
     #include "library.h"
 #endif
 
-
 const int QUERY_LENGTH = 100;
 const int MAX_WORDS = 3;
 
@@ -34,11 +33,6 @@ int main(){
 
     #ifdef DYNAMIC
         ret = init_dynamic_handler();
-
-        if (SUCCESS != ret)
-        {
-            return FAILURE;
-        }
     #endif
 
     int query_number = 0;
@@ -73,7 +67,7 @@ int main(){
             }
             else{
                 int tabSize = atoi(words[1]);
-                memory_blocks = init(tabSize);
+                memory_blocks = init_pointer(tabSize);
                 end_time_measure();
                 sleep(1);
             }
@@ -131,7 +125,7 @@ int main(){
     free(query);
     
    	#ifdef DYNAMIC
-        free_handler_memory();
+        free_handler();
     #endif
 
     return 0;

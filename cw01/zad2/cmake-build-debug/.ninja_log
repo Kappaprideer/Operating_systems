@@ -1,5 +1,13 @@
 # ninja log v5
-0	30	1678317919004564678	build.ninja	53d5a29f2c010323
+0	30	1678321148222396621	build.ninja	53d5a29f2c010323
 0	42	1678269801378460740	CMakeFiles/zad2.dir/home/endrew/Github/Operating_systems/cw01/zad1/library.c.o	95edfa2387045143
 43	70	1678274591188335645	zad2	623bba3cb4505711
-0	83	1678274908210544608	CMakeFiles/zad2.dir/main.c.o	def840936fa0cc54
+1	73	1678321061090158040	CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o	be7a3d78d4f7dbeb
+1	74	1678321061090158040	CMakeFiles/zad2.dir/library.c.o	4885c911af45baaf
+1	74	1678321061090158040	CMakeFiles/zad2.dir/main.c.o	def840936fa0cc54
+0	29	1678321149570401142	CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o	be7a3d78d4f7dbeb
+0	30	1678321270026894195	CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o	be7a3d78d4f7dbeb
+0	41	1678321270034894233	CMakeFiles/zad2.dir/main.c.o	def840936fa0cc54
+41	65	1678321270058894348	zad2	68454d529c31a7e3
+0	32	1678321341835262149	CMakeFiles/zad2.dir/lib_dynamiclibrary.c.o	be7a3d78d4f7dbeb
+32	67	1678321341867262324	zad2	68454d529c31a7e3

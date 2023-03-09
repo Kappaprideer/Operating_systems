@@ -7,8 +7,8 @@ typedef struct {
     int size;
 } chars_pointer;
 
-chars_pointer* init(int size);
-void count(chars_pointer* memory_blocks, char* filename);
+chars_pointer* init_pointer(int size);
+void count(chars_pointer* memory_blocks,const char* filename);
 char* show(chars_pointer* memory_blocks, int index);
 void delete(chars_pointer* memory_blocks, int index);
 void destroy(chars_pointer* memory_blocks);
