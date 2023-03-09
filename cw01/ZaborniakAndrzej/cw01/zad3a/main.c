@@ -45,9 +45,7 @@ int main(){
 
     while( query_number<INT_MAX && !exit_program ){
         printf("In [%d]: ", query_number++);
-        if(fgets(query,QUERY_LENGTH,stdin)==NULL){
-            fprintf(stderr, "Line read not correctly!\n");
-        }
+        fgets(query,QUERY_LENGTH,stdin);
         fflush(NULL);
         word = strtok(query, " ");
 

@@ -52,15 +52,93 @@ test_dynamic:
 
 
 
-
 test_static_O:
 	make static
-	./main < ./test_files/test.txt > ./test_files/result_static.txt
-
-test_shared:
+	$(CC) -O $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	./main < ./test_files/test.txt > ./test_files/result_static_O.txt
+test_shared_O:
 	make shared
-	./main < ./test_files/test.txt > ./test_files/result_shared.txt
+	$(CC) -O $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	./main < ./test_files/test.txt > ./test_files/result_shared_O.txt
 
-test_dynamic:
+test_dynamic_O:
 	make dynamic
-	./main < ./test_files/test.txt > ./test_files/result_dynamic.txt
+	./main < ./test_files/test.txt > ./test_files/result_dynamic_O.txt
+
+
+
+
+
+test_static_O1:
+	make static
+	$(CC) -O1 $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	./main < ./test_files/test.txt > ./test_files/result_static_O1.txt
+test_shared_O1:
+	make shared
+	$(CC) -O1 $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	./main < ./test_files/test.txt > ./test_files/result_shared_O1.txt
+
+
+
+
+test_static_O2:
+	make static
+	$(CC) -O2 $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	./main < ./test_files/test.txt > ./test_files/result_static_O2.txt
+test_shared_O2:
+	make shared
+	$(CC) -O2 $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	./main < ./test_files/test.txt > ./test_files/result_shared_O2.txt
+
+
+
+
+test_static_O3:
+	make static
+	$(CC) -O3 $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	./main < ./test_files/test.txt > ./test_files/result_static_O3.txt
+test_shared_O3:
+	make shared
+	$(CC) -O3 $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	./main < ./test_files/test.txt > ./test_files/result_shared_O3.txt
+
+
+test_static_O0:
+	make static
+	$(CC) -O0 $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	./main < ./test_files/test.txt > ./test_files/result_static_O0.txt
+test_shared_O0:
+	make shared
+	$(CC) -O0 $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	./main < ./test_files/test.txt > ./test_files/result_shared_O0.txt
+
+
+
+test_static_Os:
+	make static
+	$(CC) -Os $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	./main < ./test_files/test.txt > ./test_files/result_static_Os.txt
+test_shared_Os:
+	make shared
+	$(CC) -Os $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	./main < ./test_files/test.txt > ./test_files/result_shared_Os.txt
+
+test_all_static:
+	make test_static_O
+	make test_static_O1
+	make test_static_O2
+	make test_static_O3
+	make test_static_O0
+	make test_static_Os
+
+test_all_shared:
+	make test_shared_O
+	make test_shared_O1
+	make test_shared_O2
+	make test_shared_O3
+	make test_shared_O0
+	make test_shared_Os
+
+all:
+	make test_all_static
+	make test_all_shared
