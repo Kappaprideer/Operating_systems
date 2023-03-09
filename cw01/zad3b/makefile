@@ -2,7 +2,6 @@ CC = gcc
 FLAGS = -Wall
 LIB_NAME = lib_one
 SHORT_LIB_NAME = _one
-#LIB_DIR = ../zad1
 SOURCE_NAME = library
 
 static_lib:
@@ -37,14 +36,31 @@ clean_all:
 	rm -r main
 
 set_path:
-	export LD_LIBRARY_PATH=/home/endrew/Github/Operating_systems/cw01/zad2/
+	export LD_LIBRARY_PATH=/home/endrew/Github/Operating_systems/cw01/zad3a/
+
+test_static:
+	make static
+	./main < ./test_files/test.txt > ./test_files/result_static.txt
+
+test_shared:
+	make shared
+	./main < ./test_files/test.txt > ./test_files/result_shared.txt
+
+test_dynamic:
+	make dynamic
+	./main < ./test_files/test.txt > ./test_files/result_dynamic.txt
 
 
-#
-#test:
-#	@make static
-#	@./main < ./test/cos > ./result/wyniki.txt
 
 
+test_static_O:
+	make static
+	./main < ./test_files/test.txt > ./test_files/result_static.txt
 
-#zczyztywanie zmiennej w makefile
+test_shared:
+	make shared
+	./main < ./test_files/test.txt > ./test_files/result_shared.txt
+
+test_dynamic:
+	make dynamic
+	./main < ./test_files/test.txt > ./test_files/result_dynamic.txt
