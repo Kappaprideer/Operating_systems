@@ -18,3 +18,7 @@ clean:
 
 clean_all:
 	rm main $(LIB_NAME).a $(LIB_NAME).so
+	
+all:
+	make static
+	make shared

@@ -50,3 +50,6 @@ test_dynamic:
 	make dynamic
 	./main < ./test_files/test.txt > ./test_files/result_dynamic.txt
 
+all:
+	make test_static
+	make test_shared

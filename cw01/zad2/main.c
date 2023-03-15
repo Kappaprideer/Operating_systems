@@ -32,7 +32,7 @@ void error(int numberGivenWords, int numberExpectedWords){
 int main(){
 
     #ifdef DYNAMIC
-        int ret = init_dynamic_handler();
+        int dynamic_handler = init_dynamic_handler();
     #endif
 
     int query_number = 0;

@@ -1,0 +1,412 @@
+W zadaniu 3a czasy uzyskane przy bibliotece statycznej są większe od czasów uzyskanych przy bibliotece dielonej. 
+
+W zadaniu 3b wyniki są zbyt zbliżone, aby można było jednoznacznie wyznaczyć najlepszy rodzaj optymalizacji.
+
+Static:
+In [0]: REAL TIME: 4621 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2481654 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 3579380 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:   123  5522 37419 ./test_files/first_test.txt
+REAL TIME: 11136 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:    401  18294 123779 ./test_files/second_test.txt
+REAL TIME: 11526 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 10900 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 6636 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 7207 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+
+Shared:
+In [0]: REAL TIME: 6759 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 3413208 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 3363924 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:   123  5522 37419 ./test_files/first_test.txt
+REAL TIME: 30097 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:    401  18294 123779 ./test_files/second_test.txt
+REAL TIME: 10119 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 10479 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 13061 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 10730 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Static -O:
+In [0]: REAL TIME: 5340 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2336214 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 2785067 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 12399 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 13692 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 13591 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 42744 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 7587 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Static -O1:
+In [0]: REAL TIME: 6725 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2036298 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 2619364 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 12770 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 10670 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 13958 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 11977 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 4161 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Static -O2:
+In [0]: REAL TIME: 5372 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2135147 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 2677140 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 14168 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 11922 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 12720 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 13967 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 8325 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Static -O3:
+In [0]: REAL TIME: 5850 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2052004 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 3266066 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 13612 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 9949 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 9587 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 9251 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 9171 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Static -O0:
+In [0]: REAL TIME: 8592 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2044487 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 1745386 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 12213 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 13742 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 13953 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 7038 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 8901 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+
+Static -Os:
+In [0]: REAL TIME: 4976 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2154558 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 2448242 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 14444 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 11447 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 11927 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 8012 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 9903 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+
+Shared -O:
+In [0]: REAL TIME: 5694 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 3095638 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 1662036 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 12386 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 10189 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 12549 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 10529 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 9096 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Shared -O1:
+In [0]: REAL TIME: 5178 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2024659 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 2154303 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 10965 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 11978 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 44518 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 12148 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 9157 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Shared -O2:
+In [0]: REAL TIME: 5046 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2122809 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 2624204 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 12254 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 12294 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 12760 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 14143 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 11817 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Shared -O3:
+In [0]: REAL TIME: 5670 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2113264 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 3157785 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 14804 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 9998 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 10509 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 12394 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 8415 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Shared -O0:
+In [0]: REAL TIME: 5434 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2095152 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: -997281090 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 9427 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 9562 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 9327 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 9818 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 7998 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 
+
+Shared -Os:
+In [0]: REAL TIME: 33428 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [1]: REAL TIME: 2400006 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [2]: REAL TIME: 2629998 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [3]:  21  40 267 ./test_files/first_test.txt
+REAL TIME: 12570 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [4]:   90  286 2279 ./test_files/second_test.txt
+REAL TIME: 13371 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [5]: REAL TIME: 13537 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [6]: REAL TIME: 10279 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [7]: REAL TIME: 8018 nanosec
+USER TIME: 0 tics 
+SYST TIME: 0 tics 
+In [8]: 

@@ -1,3 +1,0 @@
-/home/endrew/Github/Operating_systems/cw01/zad1/cmake-build-debug/CMakeFiles/zad1.dir
-/home/endrew/Github/Operating_systems/cw01/zad1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/endrew/Github/Operating_systems/cw01/zad1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

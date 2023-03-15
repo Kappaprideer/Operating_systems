@@ -1,27 +1,27 @@
-In [0]: REAL TIME: 5340 nanosec
+In [0]: REAL TIME: 4446 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
-In [1]: REAL TIME: 2336214 nanosec
+In [1]: REAL TIME: 2069194 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
-In [2]: REAL TIME: 2785067 nanosec
+In [2]: REAL TIME: 3609173 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
 In [3]:  21  40 267 ./test_files/first_test.txt
-REAL TIME: 12399 nanosec
+REAL TIME: 3980 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
 In [4]:   90  286 2279 ./test_files/second_test.txt
-REAL TIME: 13692 nanosec
+REAL TIME: 10615 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
-In [5]: REAL TIME: 13591 nanosec
+In [5]: REAL TIME: 8149 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
-In [6]: REAL TIME: 42744 nanosec
+In [6]: REAL TIME: 9587 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
-In [7]: REAL TIME: 7587 nanosec
+In [7]: REAL TIME: 8585 nanosec
 USER TIME: 0 tics 
 SYST TIME: 0 tics 
 In [8]: 

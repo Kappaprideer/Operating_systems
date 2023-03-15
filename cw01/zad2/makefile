@@ -17,11 +17,11 @@ shared_lib:
 
 static:
 	make static_lib
-	$(CC) $(FLAGS) main.c -o main -L. -l$(SHORT_LIB_NAME)
+	$(CC) $(FLAGS) main.c -o main_static -L. -l$(SHORT_LIB_NAME)
 
 shared:
 	make shared_lib
-	$(CC) $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main
+	$(CC) $(FLAGS) main.c -l$(SHORT_LIB_NAME) -L. -o main_shared
 
 dynamic:
 	make shared_lib
@@ -34,17 +34,11 @@ clean_all:
 	rm -f *.so
 	rm -f *.a
 	rm -f *.o
-	rm -r main
+	rm -r main_shared
+	rm -r main_static
 
-set_path:
-	export LD_LIBRARY_PATH=/home/endrew/Github/Operating_systems/cw01/zad2/
-
-
-#
-#test:
-#	@make static
-#	@./main < ./test_files/ > ./result/wyniki.txt
+all:
+	make static
+	make shared
 
 
-
-#zczyztywanie zmiennej w makefile
