@@ -52,8 +52,6 @@ void reverse(FILE* one, int reading_variant){
 }
 
 
-
-
 int main(int argc, char* arguments[]) {
     
     char* filename_one = arguments[1];
@@ -83,15 +81,3 @@ int main(int argc, char* arguments[]) {
     
     return 0;
 }
-
-
-    // while (file_size > 0) {
-    //     size_t bytes_to_read = (file_size < BLOCK_SIZE) ? file_size : BLOCK_SIZE;
-    //     fread(buffer, 1, bytes_to_read, one);
-    //     for (int i = bytes_to_read - 1; i >= 0; i--) {
-    //         if(fputc(buffer[i], dest_file) != (int)buffer[i]){
-    //             printf("PROBLEM\n");
-    //         }
-    //     }
-    //     file_size -= bytes_to_read;
-    // }
