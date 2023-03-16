@@ -1,14 +1,14 @@
 CC = gcc
 FLAGS = -Wall
-SOURCE_NAME = main.c
-PROGRAM_NAME = main
-
+SOURCE_PROGRAM_NAME = discover.c
+PROGRAM_NAME = discover
 
 compile:
-	$(CC) $(FLAGS) $(SOURCE_NAME) -o $(PROGRAM_NAME)
-run:
-	$(CC) $(FLAGS) $(SOURCE_NAME) -o $(PROGRAM_NAME)
+	$(CC) $(FLAGS) $(SOURCE_PROGRAM_NAME) -o $(PROGRAM_NAME)
+
+all:
+	make compile
 	./$(PROGRAM_NAME)
 
 clean:
-	rm -r main
+	rm -r $(PROGRAM_NAME)	
