@@ -3,58 +3,52 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-// #define BUFFER_SIZE 1024
-#define BLOCK_SIZE 1024
+void revstr(char* string)  
+{  
+    int i, length, temp;  
+    length = strlen(string); 
+      
+    for (i = 0; i < length/2; i++)  {  
+        temp = string[i];  
+        string[i] = string[length - i - 1];  
+        string[length - i - 1] = temp;  
+    }  
+}
 
 
 // reading_variant - dla 0 - wczytywanie znak po znaku
 // reading_variant - dla 1 - wczytywnaie po 1024 znaki
 void reverse(FILE* one, int reading_variant){
     
+    int BLOCK_SIZE = (reading_variant==0) ? 1 : 1024;
     FILE* dest_file;
     char* buffer;
-    long file_size;
-
-
-
+    size_t file_size;
 
     fseek(one, 0, SEEK_END);
     file_size = ftell(one);
-    size_t begin_point = (file_size<BLOCK_SIZE) ? 0 : (file_size - BLOCK_SIZE);
     fseek(one, 0, SEEK_SET);
 
-    if(reading_variant==0){
-        dest_file = fopen("reversed_char.txt", "wb");
+    buffer = calloc(file_size, sizeof(char));
 
-        while (file_size > 0) {
-            size_t bytes_to_read = 1;
-            fread(buffer, 1, bytes_to_read, one);
-            
-            for (int i = bytes_to_read - 1; i >= 0; i--) {
-                if(fputc(buffer[i], dest_file) != (int)(buffer[i])){
-                    printf("BŁAD W CHAR");
-                }
-            }
-            file_size -= bytes_to_read;
-        }
+    size_t index = 0 ;
+    while (index<file_size) {
+        size_t bytes_to_read = (file_size-index < BLOCK_SIZE) ? file_size-index : BLOCK_SIZE;
+        index += fread(&buffer[index], sizeof(char), bytes_to_read, one);
     }
 
-    else{
-        dest_file = fopen("reversed_block.txt", "wb");
+    revstr(buffer);
 
-        while (file_size > 0) {
-            size_t bytes_to_read = (file_size < BLOCK_SIZE) ? file_size : BLOCK_SIZE;
-            fread(buffer, 1, bytes_to_read, one);
-            for (int i = bytes_to_read - 1; i >= 0; i--) {
-                if(fputc(buffer[i], dest_file) != (int)buffer[i]){
-                    printf("PROBLEM\n");
-                }
-            }
-            file_size -= bytes_to_read;
-        }
-    }
+    char* dest_file_name = (reading_variant==0) ? "reversed_char.txt" : "reversed_block.txt";
+    
+    dest_file = fopen(dest_file_name, "wb");
+    fwrite(buffer, 1, file_size, dest_file);
+    
     fclose(dest_file);
+    
+    free(buffer);
 }
 
 
@@ -89,3 +83,15 @@ int main(int argc, char* arguments[]) {
     
     return 0;
 }
+
+
+    // while (file_size > 0) {
+    //     size_t bytes_to_read = (file_size < BLOCK_SIZE) ? file_size : BLOCK_SIZE;
+    //     fread(buffer, 1, bytes_to_read, one);
+    //     for (int i = bytes_to_read - 1; i >= 0; i--) {
+    //         if(fputc(buffer[i], dest_file) != (int)buffer[i]){
+    //             printf("PROBLEM\n");
+    //         }
+    //     }
+    //     file_size -= bytes_to_read;
+    // }
