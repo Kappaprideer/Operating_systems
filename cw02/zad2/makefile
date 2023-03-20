@@ -2,7 +2,7 @@ CC = gcc
 FLAGS = -Wall
 SOURCE_PROGRAM_NAME = reverse.c
 PROGRAM_NAME = reverse
-SOURCE_FILENAME = plik2.txt
+SOURCE_FILENAME = plik1.txt
 
 
 all:
