@@ -1,7 +1,7 @@
 CC = gcc
 FLAGS = -Wall
-SOURCE_PROGRAM_NAME = n_processes.c
-PROGRAM_NAME = n_processes
+SOURCE_PROGRAM_NAME = path_ls.c
+PROGRAM_NAME = path_ls
 ARGUMENT = 5
 
 all:
@@ -12,7 +12,7 @@ compile:
 
 test:
 	make compile
-	./$(PROGRAM_NAME) $(ARGUMENT)
+	./$(PROGRAM_NAME)
 
 clean:
 	rm -r $(PROGRAM_NAME)
