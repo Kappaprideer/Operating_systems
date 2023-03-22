@@ -1,8 +1,9 @@
 CC = gcc
 FLAGS = -Wall
-SOURCE_PROGRAM_NAME = path_ls.c
-PROGRAM_NAME = path_ls
-ARGUMENT = /
+SOURCE_PROGRAM_NAME = dir_tree.c
+PROGRAM_NAME = dir_tree
+ARGUMENT_1 = /home/endrew/tmp/
+ARGUMENT_2 = aaabaaaaa
 
 all:
 	make compile
@@ -12,7 +13,7 @@ compile:
 
 test:
 	make compile
-	./$(PROGRAM_NAME) $(ARGUMENT)
+	./$(PROGRAM_NAME) $(ARGUMENT_1) $(ARGUMENT_2)
 
 clean:
 	rm -r $(PROGRAM_NAME)
