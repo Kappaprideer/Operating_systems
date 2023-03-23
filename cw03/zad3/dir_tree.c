@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits.h>
 
 size_t size_of_file(FILE *source){
     size_t file_size;
@@ -51,6 +52,9 @@ int read_directory(char *path, char* pattern){
     while ((file_handler = readdir(directory)))
     {
         size_t new_path_length = strlen(path) + strlen(file_handler->d_name) + 1;
+        if(new_path_length >= PATH_MAX ){
+            exit(EXIT_FAILURE);
+        }
         size_t path_size = strlen(path);
         new_path=calloc(new_path_length, sizeof(char));
 
@@ -59,10 +63,8 @@ int read_directory(char *path, char* pattern){
         for(size_t index=path_size+1; index<new_path_length; index++) new_path[index] = file_handler->d_name[index - path_size - 1];
 
 
-        if (stat(new_path, &file_info) == -1)
-        {
-//            fprintf(stderr, "Failed to read info about %s\n", new_path);
-//            free(new_path);
+        if (stat(new_path, &file_info) == -1){
+            continue;
         }
         else if (S_ISDIR(file_info.st_mode))
         {
@@ -71,7 +73,6 @@ int read_directory(char *path, char* pattern){
                 fork_pid = fork();
                 if(fork_pid == 0 ){
                     read_directory(new_path, pattern);
-//                    free(new_path);
                 }
 
                 if (wait(NULL) == -1){

@@ -1,7 +1,7 @@
 CC = gcc
 FLAGS = -Wall
-SOURCE_PROGRAM_NAME = dir_tree.c
-PROGRAM_NAME = dir_tree
+SOURCE_PROGRAM_NAME = dir_walk.c
+PROGRAM_NAME = dir_walk
 ARGUMENT_1 = /home/endrew/tmp
 ARGUMENT_2 = aaabaaaaa
 
