@@ -16,8 +16,7 @@ size_t size_of_file(FILE *source){
     return file_size;
 }
 
-int check_if_start_with_patter(char *filename, char *pattern)
-{
+int check_if_start_with_patter(char *filename, char *pattern){
     FILE *file;
     char *buffer;
     file = fopen(filename, "rb");
@@ -29,6 +28,7 @@ int check_if_start_with_patter(char *filename, char *pattern)
     fread(buffer, sizeof(char), buffer_size, file);
 
     fclose(file);
+
     int result = strcmp(buffer, pattern);
 
     free(buffer);
@@ -53,6 +53,7 @@ int read_directory(char *path, char* pattern){
     {
         size_t new_path_length = strlen(path) + strlen(file_handler->d_name) + 1;
         if(new_path_length >= PATH_MAX ){
+            perror("Too long path name!\n");
             exit(EXIT_FAILURE);
         }
         size_t path_size = strlen(path);
@@ -103,8 +104,7 @@ int read_directory(char *path, char* pattern){
     exit(EXIT_SUCCESS);
 }
 
-int main(int arg, char **args)
-{
+int main(int arg, char **args){
     if (arg != 3){
         fprintf(stderr, "Wrong number of arguments!\n");
         return EXIT_FAILURE;
@@ -114,7 +114,7 @@ int main(int arg, char **args)
     if(fork_pid == 0) read_directory(args[1], args[2]);
     if (wait(NULL) == -1){
         perror("Problem with executing wait function!\n");
-        return 1;
+        return EXIT_FAILURE;
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
