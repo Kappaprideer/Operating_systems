@@ -8,7 +8,6 @@
 #include <unistd.h>
 
 size_t size_of_file(FILE *source){
-
     size_t file_size;
     fseek(source, 0, SEEK_END);
     file_size = ftell(source);
@@ -24,18 +23,19 @@ int check_if_start_with_patter(char *filename, char *pattern)
     size_t file_size = size_of_file(file);
 
     size_t buffer_size = file_size < strlen(pattern) ? file_size : strlen(pattern);
-    buffer = malloc(sizeof(char)*buffer_size);
+    buffer = calloc(buffer_size, sizeof(char));
 
     fread(buffer, sizeof(char), buffer_size, file);
 
     fclose(file);
+    int result = strcmp(buffer, pattern);
+
     free(buffer);
 
-    return strcmp(buffer, pattern);
+    return result;
 }
 
-
-int read_directory(char *path, char *pattern){
+int read_directory(char *path, char* pattern){
 
     DIR *directory;
     struct dirent *file_handler;
@@ -47,53 +47,54 @@ int read_directory(char *path, char *pattern){
         exit(EXIT_FAILURE);
     }
 
+    char* new_path;
     while ((file_handler = readdir(directory)))
     {
         size_t new_path_length = strlen(path) + strlen(file_handler->d_name) + 1;
         size_t path_size = strlen(path);
-        char* new_path;
-        new_path=malloc(sizeof(char)*new_path_length);
+        new_path=calloc(new_path_length, sizeof(char));
+
         for(size_t index=0; index<path_size; index++) new_path[index] = path[index];
         new_path[path_size]='/';
         for(size_t index=path_size+1; index<new_path_length; index++) new_path[index] = file_handler->d_name[index - path_size - 1];
 
-        printf("New_path: %s \n", new_path);
-        fflush(stdout);
 
         if (stat(new_path, &file_info) == -1)
         {
-            fprintf(stderr, "Failed to read info about %s\n", file_handler->d_name);
-//             closedir(directory);
-//             exit(EXIT_FAILURE);
+//            fprintf(stderr, "Failed to read info about %s\n", new_path);
+//            free(new_path);
         }
         else if (S_ISDIR(file_info.st_mode))
         {
             if (strcmp(file_handler->d_name, ".") != 0 && strcmp(file_handler->d_name, "..") != 0)
             {
                 fork_pid = fork();
-                if(fork_pid != 0 ) read_directory(new_path, pattern);
+                if(fork_pid == 0 ){
+                    read_directory(new_path, pattern);
+//                    free(new_path);
+                }
 
-                if (fork_pid != 0 && wait(NULL) == -1){
+                if (wait(NULL) == -1){
                     perror("Problem with executing wait function!\n");
                     closedir(directory);
                     free(new_path);
+                    new_path=NULL;
                     exit(EXIT_FAILURE);
                 }
             }
+            free(new_path);
         }
         else
         {
-            printf("Path: %s PID: %d \n",  new_path, getpid());
-            fflush(stderr);
-//            if (check_if_start_with_patter(file_handler->d_name, pattern) == 0 )
-//            {
-//                // wypisac cala sciezke pliku
-//                printf("Size: %ld Filename: %s\n", file_info.st_size, file_handler->d_name);
-//            }
+            if (check_if_start_with_patter(new_path, pattern) == 0 )
+            {
+                printf("Path: %s PID: %d\n", new_path, getpid());
+                fflush(stdout);
+            }
+            free(new_path);
+            new_path=NULL;
         }
-        free(new_path);
     }
-
     if (closedir(directory)){
         perror("Failed to close directory!\n");
         exit(EXIT_FAILURE);
@@ -103,16 +104,15 @@ int read_directory(char *path, char *pattern){
 
 int main(int arg, char **args)
 {
-    if (arg != 3)
-    {
+    if (arg != 3){
         fprintf(stderr, "Wrong number of arguments!\n");
         return EXIT_FAILURE;
     }
 
-    read_directory(args[1],args[2]);
     pid_t fork_pid = fork();
+    if(fork_pid == 0) read_directory(args[1], args[2]);
     if (wait(NULL) == -1){
-        perror("Problem with executing wait functoin!\n");
+        perror("Problem with executing wait function!\n");
         return 1;
     }
     return 0;

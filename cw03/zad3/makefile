@@ -2,7 +2,7 @@ CC = gcc
 FLAGS = -Wall
 SOURCE_PROGRAM_NAME = dir_tree.c
 PROGRAM_NAME = dir_tree
-ARGUMENT_1 = /home/endrew/tmp/
+ARGUMENT_1 = /home/endrew/tmp
 ARGUMENT_2 = aaabaaaaa
 
 all:
