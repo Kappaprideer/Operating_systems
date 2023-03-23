@@ -40,56 +40,58 @@ int read_directory(char *path, char *pattern){
     DIR *directory;
     struct dirent *file_handler;
     struct stat file_info;
+    pid_t fork_pid;
 
     if (!(directory = opendir(path))){
-        perror("Failed to open directory!\n");
+        fprintf(stderr, "Failed to open directory: %s!\n", path);
         exit(EXIT_FAILURE);
     }
 
-    pid_t fork_pid;
-
     while ((file_handler = readdir(directory)))
     {
+        size_t new_path_length = strlen(path) + strlen(file_handler->d_name) + 1;
+        size_t path_size = strlen(path);
+        char* new_path;
+        new_path=malloc(sizeof(char)*new_path_length);
+        for(size_t index=0; index<path_size; index++) new_path[index] = path[index];
+        new_path[path_size]='/';
+        for(size_t index=path_size+1; index<new_path_length; index++) new_path[index] = file_handler->d_name[index - path_size - 1];
 
-        if (stat(file_handler->d_name, &file_info) != 0)
+        printf("New_path: %s \n", new_path);
+        fflush(stdout);
+
+        if (stat(new_path, &file_info) == -1)
         {
-            fprintf(stderr, "Failed to read info about %s!\n", file_handler->d_name);
-            closedir(directory);
-            exit(EXIT_FAILURE);
+            fprintf(stderr, "Failed to read info about %s\n", file_handler->d_name);
+//             closedir(directory);
+//             exit(EXIT_FAILURE);
         }
-
-        if (S_ISDIR(file_info.st_mode))
+        else if (S_ISDIR(file_info.st_mode))
         {
             if (strcmp(file_handler->d_name, ".") != 0 && strcmp(file_handler->d_name, "..") != 0)
             {
-                // stworzyć nową nazwę ścieżki do pliku
-                size_t new_path_length = strlen(path) + strlen(file_handler->d_name) + 1;
-                size_t path_size = strlen(path);
-
-                char new_path[new_path_length];
-                for(int index=0; index<path_size; index++) new_path[index] = path[index];
-                new_path[path_size]='/';
-                for(int index=path_size+1; index<path_size; index++) new_path[index] = file_handler->d_name[index];
-
                 fork_pid = fork();
+                if(fork_pid != 0 ) read_directory(new_path, pattern);
 
-                read_directory(new_path, pattern);
-
-                if (wait(NULL) == -1){
+                if (fork_pid != 0 && wait(NULL) == -1){
                     perror("Problem with executing wait function!\n");
                     closedir(directory);
+                    free(new_path);
                     exit(EXIT_FAILURE);
                 }
             }
         }
         else
         {
-            if (check_if_start_with_patter(file_handler->d_name, pattern) == 0)
-            {
-                // wypisac cala sciezke pliku
-                printf("Size: %ld Filename: %s\n", file_info.st_size, file_handler->d_name);
-            }
+            printf("Path: %s PID: %d \n",  new_path, getpid());
+            fflush(stderr);
+//            if (check_if_start_with_patter(file_handler->d_name, pattern) == 0 )
+//            {
+//                // wypisac cala sciezke pliku
+//                printf("Size: %ld Filename: %s\n", file_info.st_size, file_handler->d_name);
+//            }
         }
+        free(new_path);
     }
 
     if (closedir(directory)){
@@ -107,12 +109,11 @@ int main(int arg, char **args)
         return EXIT_FAILURE;
     }
 
-    pid_t fork_pid = fork();
     read_directory(args[1],args[2]);
+    pid_t fork_pid = fork();
     if (wait(NULL) == -1){
         perror("Problem with executing wait functoin!\n");
         return 1;
     }
-
     return 0;
 }
