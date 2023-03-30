@@ -1,7 +1,7 @@
 CC = gcc
 FLAGS = -Wall
-SOURCE_PROGRAM_NAME = fork_and_exec_visual.c
-PROGRAM_NAME = fork_and_exec_visual
+SOURCE_PROGRAM_NAME = sigaction_flags.c
+PROGRAM_NAME = sigaction_flags
 
 
 all:
