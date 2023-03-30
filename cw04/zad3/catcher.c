@@ -11,37 +11,28 @@
 int change_count = 0;
 int quit = 0;
 int loop_time = 0;
-
+pid_t sender_pid;
 
 void show_current_time(){
     time_t t;
     time(&t);
-    printf("current time is : %s\n",ctime(&t));
-    send_confirm();
+    printf("CATCHER: current time is: %s\n",ctime(&t));
 }
 
 void print_loop_time(){
     loop_time = 1;
-    send_confirm();
-    while(loop_time){
-        show_current_time();
-        sleep(1);
-    }
 }
 
 void print_hundred(){
     for(int i=1; i<=100; i++) printf("%d ", i);
     printf("\n\n");
-    send_confirm();
 }
 
 void show_change_count(){
     printf("CATCHER: Count of change commands: %d\n\n", change_count);
-    send_confirm();
 }
 
 void quit_program(){
-    send_confirm();
     printf("CATCHER: Quitting program\n\n");
     quit = 1;
 }
@@ -59,12 +50,10 @@ void execute_command(int command){
 void read_action(int sig_num, siginfo_t* sig_info, void* nothing){
     change_count++;
     loop_time = 0;
-    pid_t sender_pid = sig_info->si_pid;
+    sender_pid = sig_info->si_pid;
     int command = sig_info->si_value.sival_int;
-    printf("NUMER KOMENDY: %d\n", command);
     execute_command(command);
     kill(sender_pid, SIGUSR1);
-
 }
 
 int main() {
@@ -77,7 +66,10 @@ int main() {
     action.sa_flags = SA_SIGINFO;
     sigaction(SIGUSR2, &action, NULL);
     while(!quit){
-}
-
+        if( loop_time == 1){
+            show_current_time();
+            sleep(1);
+        }
+    }
 return 0;
 }
