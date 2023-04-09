@@ -1,0 +1,15 @@
+Width: 0.0000000005 N: 1
+Integral value: 3.141593
+Time: 9.484816s
+
+Width: 0.0000000008 N: 2
+Integral value: 3.141592
+Time: 5.241725s
+
+Width: 0.0000000009 N: 10
+Integral value: 3.141594
+Time: 5.797380s
+
+Width: 0.0000000009 N: 100
+Integral value: 3.141587
+Time: 4.593247s

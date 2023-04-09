@@ -4,6 +4,7 @@
 #include <time.h>
 #include <aio.h>
 #include <sys/wait.h>
+#include <sys/times.h>
 
 #define BUFFER_SIZE 255
 
@@ -29,9 +30,9 @@ int main(int arg, char** args){
     int count = atoi(args[2]);
     double result = 0;
 
-    clock_t start, end;
-    start = clock();
-
+    struct timespec timespec_start, timespec_end;
+    clock_gettime(CLOCK_REALTIME, &timespec_start);
+    
     for(int process_count = 1; process_count <= count ; process_count++){
         int fd[2];
         double value;
@@ -68,12 +69,15 @@ int main(int arg, char** args){
             result+=atof(buffer);
         }
     }
-    
-    end = clock();
-    double time_spent = ((double) (end - start)) / CLOCKS_PER_SEC;
 
+    clock_gettime(CLOCK_REALTIME, &timespec_end);
+    double sec = (timespec_end.tv_sec - timespec_start.tv_sec); 
+    double nan = (timespec_end.tv_nsec - timespec_start.tv_nsec);
+    nan = nan < 0 ? (nan+1000000000)/1000000000 : nan/1000000000;
+
+    printf("Width: %s N: %d\n", args[1], count);
     printf("Integral value: %f\n", result);
-    printf("Time: %fs\n", time_spent);
+    printf("Time: %fs\n\n", sec + nan);
 
     return 0;
 }
