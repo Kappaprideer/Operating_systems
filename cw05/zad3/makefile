@@ -5,10 +5,10 @@ PROGRAM_NAME = integral_round_two
 
 all:
 	make compile
-	./$(PROGRAM_NAME) 0.000000001 1 > raport.txt
-	./$(PROGRAM_NAME) 0.000000001 2 >> raport.txt
-	./$(PROGRAM_NAME) 0.000000001 10 >> raport.txt
-	./$(PROGRAM_NAME) 0.00000002 1 >> raport.txt
+	./$(PROGRAM_NAME) 0.0000000005 1 > raport.txt
+	./$(PROGRAM_NAME) 0.0000000008 2 >> raport.txt
+	./$(PROGRAM_NAME) 0.0000000009 10 >> raport.txt
+	./$(PROGRAM_NAME) 0.0000000009 100 >> raport.txt
 	./$(PROGRAM_NAME) 0.00000002 100 >> raport.txt
 
 
