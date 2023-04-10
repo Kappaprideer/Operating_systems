@@ -3,12 +3,14 @@ CC = gcc
 SOURCE_NAME = integral_round_two.c
 PROGRAM_NAME = integral_round_two
 
-
 all:
 	make compile
-	./$(PROGRAM_NAME) 0.0000001 1 > raport.txt
-	./$(PROGRAM_NAME) 0.0000001 2 >> raport.txt
-	./$(PROGRAM_NAME) 0.0000001 10 >> raport.txt
+	./$(PROGRAM_NAME) 0.000000001 1 > raport.txt
+	./$(PROGRAM_NAME) 0.000000001 2 >> raport.txt
+	./$(PROGRAM_NAME) 0.000000001 10 >> raport.txt
+	./$(PROGRAM_NAME) 0.00000002 1 >> raport.txt
+	./$(PROGRAM_NAME) 0.00000002 100 >> raport.txt
+
 
 test:
 	make compile

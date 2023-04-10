@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <limits.h>
 
-
-#define BUFFER_SIZE 512
 #define PATH "/tmp/queue"
 
 double rectangle_value(double x, double dx){
@@ -24,21 +25,19 @@ int main(int arg, char** args){
 
     double result = process_value(a,b,dx);
 
-
-    char buffer[BUFFER_SIZE];
+    char* buffer = calloc(PIPE_BUF, sizeof(char));
 
     size_t len;
     
-    if((len = snprintf(buffer, BUFFER_SIZE , "%lf\n", result)) < 0 ){
+    if( (len = snprintf(buffer, PIPE_BUF , "%lf\n", result)) < 0 ){
         fprintf(stderr, "Problem with converting float to char!\n");
         return 1;
     }
 
-    FILE* fifo = fopen(PATH , "w");
-    while( fwrite(buffer, sizeof(char), len, fifo) <= 0 ) {}
-    fclose(fifo);
-
-    printf("BUFFER: %s\n", buffer);
+    int fifo = open(PATH, O_WRONLY);
+    while( write(fifo, buffer, len) <= 0 ) {}
+    
+    close(fifo);
 
     return 0;
 }
