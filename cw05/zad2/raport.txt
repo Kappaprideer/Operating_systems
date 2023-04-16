@@ -1,16 +1,16 @@
 Width: 0.0000000005 N: 1
 Integral value: 3.141593
-Time: 8.116777s
+Time: 7.760884s
 
 Width: 0.0000000008 N: 2
 Integral value: 3.141592
-Time: 6.147468s
+Time: 5.842905s
 
 Width: 0.0000000009 N: 10
 Integral value: 3.141594
-Time: 4.574070s
+Time: 5.306381s
 
 Width: 0.0000000009 N: 100
 Integral value: 3.141587
-Time: 5.545910s
+Time: 4.339278s
 
