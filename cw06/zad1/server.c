@@ -5,7 +5,7 @@
 #define MSG_SIZE sizeof(msgbuf)-sizeof(long)
 
 int client_num=0;
-int s_id;
+int s_queue;
 int client_id[MAX_CLIENTS];
 int active[MAX_CLIENTS];
 int c_queue[MAX_CLIENTS];
@@ -26,6 +26,7 @@ void handle_init(msgbuf* msg){
 
         msg->receiver_id = client_num;
     }
+    printf("Polecial init!\n");
     msgsnd(msg->sender_id, msg, MSG_SIZE, 0);
 }
 
@@ -59,7 +60,13 @@ void handle_to_one(msgbuf* msg){
 
 
 void handle_stop(msgbuf* msg){
-
+    int index;
+    for(index=0; index<MAX_CLIENTS; index++){
+        if( client_id[index] == msg->sender_id ){
+            break;
+        }
+    }
+    active[index] = FALSE;
 
 }
 
@@ -69,9 +76,10 @@ void handle_shutdown(){
     for(int index=0; index<MAX_CLIENTS; index++){
         if( active[index] == TRUE ){
             msgsnd(c_queue[index], msg, MSG_SIZE, 0);
+            msgrcv(s_queue, msg, MSG_SIZE, STOP, 0);
         }
     }
-    msgctl(s_id, IPC_RMID, NULL);
+    msgctl(s_queue, IPC_RMID, NULL);
     exit(EXIT_SUCCESS);
 }
 
@@ -81,9 +89,8 @@ int main(int arg, char** args){
     for(int i=0; i<MAX_CLIENTS; i++) active[i]=FALSE;
 
     key_t key = ftok(HOME, SERVER_ID);
-    s_id = msgget(key, IPC_CREAT | 0666);
-    
-    if (s_id == -1){
+    s_queue = msgget(key, IPC_CREAT | 0666);
+    if (s_queue == -1){
         perror("msgget");
         exit(EXIT_FAILURE);
     }
@@ -94,7 +101,7 @@ int main(int arg, char** args){
 
     while(TRUE){
 
-        msgrcv(s_id, msg, MSG_SIZE, -10,0);
+        msgrcv(s_queue, msg, MSG_SIZE, -6,0);
         switch(msg->type)
         {
             case INIT:
@@ -116,9 +123,7 @@ int main(int arg, char** args){
             case STOP:
                 handle_stop(msg);
                 break;
-        }
-            
+        }  
     }
-
     return 0;
 }

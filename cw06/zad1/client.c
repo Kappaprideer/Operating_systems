@@ -13,7 +13,7 @@ void init(){
     msgbuf* msg = malloc(sizeof(msgbuf));
     msg->type = INIT;
     msg->sender_id = queue_id;
-    msgsnd(server_id, msg, MSG_SIZE, IPC_NOWAIT);
+    msgsnd(server_id, msg, MSG_SIZE, 0);
     msgrcv(queue_id, msg, MSG_SIZE, INIT, INIT);
 
     if (( client_id = msg->receiver_id) == -1){
@@ -27,7 +27,7 @@ void list_handler(){
     msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
     msg->type = LIST;
     msg->sender_id = client_id;
-    msgsnd(server_id, msg, MSG_SIZE, IPC_NOWAIT);
+    msgsnd(server_id, msg, MSG_SIZE, 0);
 }
 
 void to_all_handler(char* message){
@@ -37,7 +37,7 @@ void to_all_handler(char* message){
     msg->sender_id = client_id;
     strcpy(msg->text, message);
 
-    msgsnd(server_id, msg, MSG_SIZE, IPC_NOWAIT);
+    msgsnd(server_id, msg, MSG_SIZE, 0);
 }
 
 void to_one_handler(int receiver_id, char* message){
@@ -48,14 +48,14 @@ void to_one_handler(int receiver_id, char* message){
     msg->receiver_id = receiver_id;
     strcpy(msg->text, message);
 
-    msgsnd(server_id, msg, MSG_SIZE, IPC_NOWAIT);
+    msgsnd(server_id, msg, MSG_SIZE, 0);
 }
 
 void stop_handler(){
     msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
     msg->type = STOP;
     msg->sender_id = client_id;
-    msgsnd(server_id, msg, MSG_SIZE, IPC_NOWAIT);
+    msgsnd(server_id, msg, MSG_SIZE, 0);
 
     msgctl(queue_id, IPC_RMID, NULL);
     exit(EXIT_SUCCESS);
@@ -75,11 +75,12 @@ void print_message(){
 }
 
 int main(int arg, char** args){
+    srand(time(NULL));
 
     key_t server_key = ftok(HOME, SERVER_ID);
     key_t client_key = ftok(HOME, rand()%256);
 
-    server_id = msgget(server_key, IPC_CREAT | 0666 );
+    server_id = msgget(server_key, 0);
     queue_id = msgget(client_key, IPC_CREAT | 0666 );
     
     if (server_id == -1 || queue_id == -1){
@@ -89,7 +90,7 @@ int main(int arg, char** args){
 
     signal(SIGINT, stop_handler);
 
-    // init();
+    init();
     
     line = calloc(LINE_LEN, sizeof(char));
     
@@ -124,7 +125,7 @@ int main(int arg, char** args){
                 to_one_handler(id, context+strlen(command)+strlen(receiver_id)+2);
         }
         else{ fprintf(stderr, "Unrecognized command! Try again.\n");}
-        free(context);
+        // free(context);
 
         print_message();
     }

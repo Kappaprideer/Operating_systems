@@ -1,6 +1,3 @@
-// #ifndef CONSTANTS_H
-// #define CONSTANTS_H
-
 #include <stdio.h>
 #include <sys/msg.h>
 #include <sys/shm.h>
@@ -11,16 +8,16 @@
 #define FALSE 0
 
 #define HOME "/tmp/queue"
-#define SERVER_ID 5
+#define SERVER_ID 1
 #define MSG_LEN 512
 #define MAX_CLIENTS 10
 
-#define INIT 0
+#define INIT 1
 
-#define LIST 1
-#define TO_ALL 2
-#define TO_ONE 3
-#define STOP 4
+#define LIST 2
+#define TO_ALL 3
+#define TO_ONE 4
+#define STOP 5
 
 
 typedef struct msgbuf {
