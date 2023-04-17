@@ -15,6 +15,8 @@ void init(){
     msgbuf* msg = malloc(sizeof(msgbuf));
     msg->type = INIT;
     msg->sender_id = queue_id;
+    msg->time = time(NULL);
+
     msgsnd(server_queue, msg, MSG_SIZE, 0);
     msgrcv(queue_id, msg, MSG_SIZE, INIT, INIT);
 
@@ -22,14 +24,17 @@ void init(){
         fprintf(stderr, "No free slots for new client!\n");
         exit(EXIT_SUCCESS);
     }
-    // free(msg);
+    free(msg);
 }
 
 void list_handler(){
     msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
     msg->type = LIST;
     msg->sender_id = client_id;
+    msg->time = time(NULL);
+
     msgsnd(server_queue, msg, MSG_SIZE, 0);
+    free(msg);
 }
 
 void to_all_handler(char* message){
@@ -38,31 +43,38 @@ void to_all_handler(char* message){
     msg->type = TO_ALL;
     msg->sender_id = client_id;
     msg->time = time(NULL);
+    
     strcpy(msg->text, message);
 
     msgsnd(server_queue, msg, MSG_SIZE, 0);
+    free(msg);
 }
 
 void to_one_handler(int receiver_id, char* message){
-    msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
+    msgbuf* msg =malloc(sizeof(msgbuf));
 
     msg->type = TO_ONE;
     msg->sender_id = client_id;
     msg->receiver_id = receiver_id;
     msg->time = time(NULL);
+
     strcpy(msg->text, message);
 
     msgsnd(server_queue, msg, MSG_SIZE, 0);
+    free(msg);
 }
 
 void stop_handler(){
     msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
     msg->type = STOP;
     msg->sender_id = client_id;
+    msg->time = time(NULL);
+
     msgsnd(server_queue, msg, MSG_SIZE, 0);
 
     queue_id = msgget(client_key, 0);
     msgctl(queue_id, IPC_RMID, NULL);
+    free(msg);
     exit(EXIT_SUCCESS);
 }
 
@@ -70,11 +82,11 @@ void handle_server_message(){
     msgbuf* msg = malloc(sizeof(msgbuf));
 
     while(msgrcv(queue_id, msg, MSG_SIZE, -6, IPC_NOWAIT ) != -1){
-        printf("ODEBRANA WIADOMOSC\n");
         if(msg->type != STOP){
-            printf("From: %d\nAt: %sMessage: %s", msg->sender_id, ctime(&( msg->time )), msg->text);
+            printf("From: %d\nAt: %sMessage: %s\n", msg->sender_id, ctime(&( msg->time )), msg->text);
         }
         else{
+            free(msg);
             stop_handler();
         }
     }

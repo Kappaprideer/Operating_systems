@@ -22,3 +22,7 @@ server:
 clean:
 	rm -r $(C_PROGRAM)
 	rm -r $(S_PROGRAM)
+
+clean_all:
+	make clean
+	rm -r logs.txt

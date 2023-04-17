@@ -9,7 +9,8 @@ int s_queue;
 int client_id[MAX_CLIENTS];
 int active[MAX_CLIENTS];
 int c_queue[MAX_CLIENTS];
-
+FILE* logs;
+char* log_line;
 
 void handle_init(msgbuf* msg){
     client_num++;
@@ -81,6 +82,8 @@ void handle_shutdown(){
             msgrcv(s_queue, msg, MSG_SIZE, STOP, 0);
         }
     }
+    fclose(logs);
+    free(log_line);
     msgctl(s_queue, IPC_RMID, NULL);
     exit(EXIT_SUCCESS);
 }
@@ -101,6 +104,10 @@ int main(int arg, char** args){
 
     msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf)); 
 
+    logs = fopen("./logs.txt", "w");
+    
+    log_line = calloc(MSG_LEN, sizeof(char));
+    
     while(TRUE){
 
         if(msgrcv(s_queue, msg, MSG_SIZE, -6,0) >=0){
@@ -109,22 +116,27 @@ int main(int arg, char** args){
         switch(msg->type) 
         {
             case INIT:
+                fprintf(logs, "User: %d logged to server at: %s", msg->sender_id, ctime( &(msg->time)));
                 handle_init(msg);
                 break;
 
             case LIST:
+                fprintf(logs, "User: %d requested list command at: %s", msg->sender_id, ctime( &(msg->time)));
                 handle_list(msg);
                 break;
 
             case TO_ALL:
+                fprintf(logs, "User: %d sent a messge to all active clients at: %sMessage: %s", msg->sender_id, ctime( &(msg->time)), msg->text);
                 handle_to_all(msg);
                 break;
 
             case TO_ONE:
+                fprintf(logs, "User: %d sent a messge to user: %d at: %sMessage: %s", msg->sender_id, msg->receiver_id, ctime( &(msg->time)), msg->text);
                 handle_to_one(msg);
                 break;
 
             case STOP:
+                fprintf(logs, "User: %d requested STOP command at: %s", msg->sender_id, ctime( &(msg->time)));
                 handle_stop(msg);
                 break;
         }  
