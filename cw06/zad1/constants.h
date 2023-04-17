@@ -7,7 +7,7 @@
 #define TRUE 1
 #define FALSE 0
 
-#define HOME "/tmp/queue"
+#define HOME getenv("HOME")
 #define SERVER_ID 1
 #define MSG_LEN 512
 #define MAX_CLIENTS 10
@@ -21,9 +21,9 @@
 
 
 typedef struct msgbuf {
-  long type;         /* typ komunikatu   */
+  long type;
   time_t time;
   int sender_id;
   int receiver_id;
-  char text[MSG_LEN];      /* tresc komunikatu */
+  char text[MSG_LEN];
 } msgbuf;

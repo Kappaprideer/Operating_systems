@@ -4,20 +4,21 @@
 
 #define MSG_SIZE sizeof(msgbuf)-sizeof(long)
 
-int client_num=0;
+static int client_num=0;
 int s_queue;
 int client_id[MAX_CLIENTS];
 int active[MAX_CLIENTS];
 int c_queue[MAX_CLIENTS];
-key_t c_key[MAX_CLIENTS];
 
 
 void handle_init(msgbuf* msg){
     client_num++;
     int i;
-    for(i=0; i<MAX_CLIENTS && active[i]==TRUE; i++)
+
+    for(i=0; i<MAX_CLIENTS && active[i]==TRUE; i++){}
     if(i==MAX_CLIENTS){
         msg->receiver_id = -1; 
+        printf("HERE\n");
     }
     else{
         active[i]=TRUE;
@@ -26,21 +27,22 @@ void handle_init(msgbuf* msg){
 
         msg->receiver_id = client_num;
     }
-    printf("Polecial init!\n");
+    printf("Polecial init! ID clienta: %d\n", msg->receiver_id);
     msgsnd(msg->sender_id, msg, MSG_SIZE, 0);
 }
 
 void handle_list(msgbuf* msg){
     for(int index=0; index<MAX_CLIENTS; index++){
         if(active[index] == TRUE){
-            printf("Acive client number: %d\n", client_id[index]);
+            printf("Client number: %d is active.\n", client_id[index]);
         }
     }
+    printf("\n");
 }
 
 void handle_to_all(msgbuf* msg){
     for(int i=0; i<MAX_CLIENTS; i++){
-        if(active[i] == TRUE){
+        if(active[i] == TRUE && client_id[i]!=msg->sender_id){
             msgsnd(c_queue[i], msg, MSG_SIZE, IPC_NOWAIT);
         }
     }
@@ -67,12 +69,12 @@ void handle_stop(msgbuf* msg){
         }
     }
     active[index] = FALSE;
-
 }
 
 void handle_shutdown(){
     msgbuf* msg = malloc(sizeof(msgbuf));
     msg->type = STOP;
+
     for(int index=0; index<MAX_CLIENTS; index++){
         if( active[index] == TRUE ){
             msgsnd(c_queue[index], msg, MSG_SIZE, 0);
@@ -101,8 +103,10 @@ int main(int arg, char** args){
 
     while(TRUE){
 
-        msgrcv(s_queue, msg, MSG_SIZE, -6,0);
-        switch(msg->type)
+        if(msgrcv(s_queue, msg, MSG_SIZE, -6,0) >=0){
+            printf("NEW INFO!\n");
+        }
+        switch(msg->type) 
         {
             case INIT:
                 handle_init(msg);

@@ -1,19 +1,21 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "constants.h"
 
 #define LINE_LEN 1024
 #define MSG_SIZE sizeof(msgbuf) - sizeof(long)
 char* line;
-int client_id, queue_id, server_id;
+int client_id, queue_id, server_queue;
+key_t client_key;
 
 void init(){    
     msgbuf* msg = malloc(sizeof(msgbuf));
     msg->type = INIT;
     msg->sender_id = queue_id;
-    msgsnd(server_id, msg, MSG_SIZE, 0);
+    msgsnd(server_queue, msg, MSG_SIZE, 0);
     msgrcv(queue_id, msg, MSG_SIZE, INIT, INIT);
 
     if (( client_id = msg->receiver_id) == -1){
@@ -27,17 +29,18 @@ void list_handler(){
     msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
     msg->type = LIST;
     msg->sender_id = client_id;
-    msgsnd(server_id, msg, MSG_SIZE, 0);
+    msgsnd(server_queue, msg, MSG_SIZE, 0);
 }
 
 void to_all_handler(char* message){
-    msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
+    msgbuf* msg = malloc(sizeof(msgbuf));
 
     msg->type = TO_ALL;
     msg->sender_id = client_id;
+    msg->time = time(NULL);
     strcpy(msg->text, message);
 
-    msgsnd(server_id, msg, MSG_SIZE, 0);
+    msgsnd(server_queue, msg, MSG_SIZE, 0);
 }
 
 void to_one_handler(int receiver_id, char* message){
@@ -46,27 +49,30 @@ void to_one_handler(int receiver_id, char* message){
     msg->type = TO_ONE;
     msg->sender_id = client_id;
     msg->receiver_id = receiver_id;
+    msg->time = time(NULL);
     strcpy(msg->text, message);
 
-    msgsnd(server_id, msg, MSG_SIZE, 0);
+    msgsnd(server_queue, msg, MSG_SIZE, 0);
 }
 
 void stop_handler(){
     msgbuf* msg =(msgbuf*)malloc(sizeof(msgbuf));
     msg->type = STOP;
     msg->sender_id = client_id;
-    msgsnd(server_id, msg, MSG_SIZE, 0);
+    msgsnd(server_queue, msg, MSG_SIZE, 0);
 
+    queue_id = msgget(client_key, 0);
     msgctl(queue_id, IPC_RMID, NULL);
     exit(EXIT_SUCCESS);
 }
 
-void print_message(){
+void handle_server_message(){
     msgbuf* msg = malloc(sizeof(msgbuf));
-    
-    while(msgrcv(client_id, msg, MSG_SIZE, 0, MSG_NOERROR ) >= 0){
+
+    while(msgrcv(queue_id, msg, MSG_SIZE, -6, IPC_NOWAIT ) != -1){
+        printf("ODEBRANA WIADOMOSC\n");
         if(msg->type != STOP){
-            printf("From: %d\nMessage: %s\nAt: %s\n", msg->sender_id, msg->text, ctime(&( msg->time )));
+            printf("From: %d\nAt: %sMessage: %s", msg->sender_id, ctime(&( msg->time )), msg->text);
         }
         else{
             stop_handler();
@@ -75,15 +81,14 @@ void print_message(){
 }
 
 int main(int arg, char** args){
-    srand(time(NULL));
 
     key_t server_key = ftok(HOME, SERVER_ID);
-    key_t client_key = ftok(HOME, rand()%256);
+    client_key = ftok(HOME, getpid());
 
-    server_id = msgget(server_key, 0);
+    server_queue = msgget(server_key, 0);
     queue_id = msgget(client_key, IPC_CREAT | 0666 );
     
-    if (server_id == -1 || queue_id == -1){
+    if (server_queue == -1 || queue_id == -1){
         perror("msgget");
         exit(EXIT_FAILURE);
     }
@@ -101,6 +106,9 @@ int main(int arg, char** args){
         getline(&line, &len, stdin);        
         char* context = calloc(sizeof(len)+1,sizeof(char));
         strcpy(context, line);
+
+        handle_server_message();
+
 
         char* command = strtok(line, " ");
         
@@ -124,10 +132,8 @@ int main(int arg, char** args){
             else
                 to_one_handler(id, context+strlen(command)+strlen(receiver_id)+2);
         }
-        else{ fprintf(stderr, "Unrecognized command! Try again.\n");}
-        // free(context);
 
-        print_message();
+        else{ fprintf(stderr, "Unrecognized command! Try again.\n");}
     }
     return 0;
 }
