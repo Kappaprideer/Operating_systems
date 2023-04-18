@@ -145,7 +145,7 @@ int main(int arg, char** args){
                 to_one_handler(id, context+strlen(command)+strlen(receiver_id)+2);
         }
 
-        else{ fprintf(stderr, "Unrecognized command! Try again.\n");}
+        else if(strcmp(line, "\n")!= 0){ fprintf(stderr, "Unrecognized command! Try again.\n");}
     }
     return 0;
 }

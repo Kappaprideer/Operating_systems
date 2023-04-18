@@ -1,2 +1,13 @@
-User: 32805 logged to server at: Mon Apr 17 18:07:29 2023
-User: 1 requested STOP command at: Mon Apr 17 18:07:34 2023
+User: 1 logged to server at: Tue Apr 18 15:56:14 2023
+User: 2 logged to server at: Tue Apr 18 15:56:17 2023
+User: 3 logged to server at: Tue Apr 18 15:56:20 2023
+User: 1 requested list command at: Tue Apr 18 15:56:22 2023
+User: 1 requested STOP command at: Tue Apr 18 15:56:27 2023
+User: 4 logged to server at: Tue Apr 18 15:56:30 2023
+User: 3 sent a messge to all active clients at: Tue Apr 18 15:56:37 2023
+Message: Hi everyone!
+User: 4 sent a messge to user: 3 at: Tue Apr 18 15:56:51 2023
+Message: Hi num 3
+User: 2 sent a messge to all active clients at: Tue Apr 18 15:57:05 2023
+Message: HELLO
+Server is shutting down. Waiting for clients to log out. Request at: Tue Apr 18 15:57:12 2023

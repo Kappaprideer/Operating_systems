@@ -4,7 +4,7 @@
 
 #define MSG_SIZE sizeof(msgbuf)-sizeof(long)
 
-static int client_num=0;
+int client_num=0;
 int s_queue;
 int client_id[MAX_CLIENTS];
 int active[MAX_CLIENTS];
@@ -18,8 +18,8 @@ void handle_init(msgbuf* msg){
 
     for(i=0; i<MAX_CLIENTS && active[i]==TRUE; i++){}
     if(i==MAX_CLIENTS){
-        msg->receiver_id = -1; 
-        printf("HERE\n");
+        msg->receiver_id = -1;
+        fprintf(logs, "User: %d failed while loging on server. No slots available! At: %s", client_num, ctime( &(msg->time)));
     }
     else{
         active[i]=TRUE;
@@ -27,8 +27,9 @@ void handle_init(msgbuf* msg){
         c_queue[i]=msg->sender_id;
 
         msg->receiver_id = client_num;
+        fprintf(logs, "User: %d logged to server at: %s", client_num, ctime( &(msg->time)));
+
     }
-    printf("Polecial init! ID clienta: %d\n", msg->receiver_id);
     msgsnd(msg->sender_id, msg, MSG_SIZE, 0);
 }
 
@@ -75,6 +76,9 @@ void handle_stop(msgbuf* msg){
 void handle_shutdown(){
     msgbuf* msg = malloc(sizeof(msgbuf));
     msg->type = STOP;
+    time_t time_buf;
+    time_buf = time(NULL);
+    fprintf(logs, "Server is shutting down. Waiting for clients to log out. Request at: %s", ctime(&time_buf));
 
     for(int index=0; index<MAX_CLIENTS; index++){
         if( active[index] == TRUE ){
@@ -111,12 +115,10 @@ int main(int arg, char** args){
     while(TRUE){
 
         if(msgrcv(s_queue, msg, MSG_SIZE, -6,0) >=0){
-            printf("NEW INFO!\n");
         }
         switch(msg->type) 
         {
             case INIT:
-                fprintf(logs, "User: %d logged to server at: %s", msg->sender_id, ctime( &(msg->time)));
                 handle_init(msg);
                 break;
 
