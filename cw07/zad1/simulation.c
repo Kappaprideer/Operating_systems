@@ -2,10 +2,20 @@
 #include <sys/sem.h>
 #include <sys/ipc.h>
 #include <sys/types.h>
+#include <sys/shm.h>
 #include <stdio.h>
 #include <unistd.h>
 
+
 #include "common.h"
+
+union semun {
+    int val;
+    struct semid_ds *buf;
+    unsigned short *array;
+    struct seminfo *__buf;
+};
+
 
 int free_chairs = MAX_CHAIRS, free_barbers = MAX_BARBERS, queue = 0;
 
@@ -18,22 +28,70 @@ void print_info(){
     printf("\n-----------------------------------------\n\n");
 }
 
+int create_shared_memory(int type){
+    key_t key;
+    switch (type){
+
+    case SIMULATION:
+        key = ftok(SHM_SIMULATION, SIMULATION);
+        break;
+    
+    case CLIENT:
+        key = ftok(SHM_CLIENTS, CLIENT);
+        break;    
+    }
+
+    int shared_memory_id = shmget(key, SIZE, IPC_CREAT | 0666);
+    
+    if (shared_memory_id < 0){
+        fprintf(stderr, "Can't create shared memory!\n");
+        exit(EXIT_FAILURE);
+    }
+    return shared_memory_id;
+}
+
+int create_semaphore(int type){
+    key_t sem_key;
+
+    switch (type){
+        case SIMULATION:
+            sem_key = ftok(SEM_SIMULATION, SIMULATION);
+            break;    
+        case BARBER:
+            sem_key = ftok(SEM_BARBERS, BARBER);
+            break;
+        case CLIENT:
+            sem_key = ftok(SEM_CLIENTS, CLIENT);
+            break;    
+    }
+
+    int semaphore_id = semget(sem_key, 1, IPC_CREAT | 0666);
+    if (semaphore_id < 0){
+        printf("Cannot create semaphores set\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    union semun arg;    
+    arg.val = 0;
+    semctl(semaphore_id, 0, SETVAL, arg);
+    
+    return semaphore_id;
+}
+
+
 
 int main(){
 
-    key_t sim_key = ftok(SEM_SIMULATION, SIMULATION);
-    int sim_sem = semget(sim_key, 1, IPC_CREAT | 0666);
+    int sim_sem = create_semaphore(SIMULATION);
+    int barber_sem = create_semaphore(BARBER);
+    int client_sem = create_semaphore(CLIENT);
 
-    key_t barber_key = ftok(SEM_BARBERS, BARBER);
-    int barber_sem = semget(barber_key, 1, IPC_CREAT | 0666);
-
-    key_t client_key = ftok(SEM_CLIENTS, CLIENT);
-    int client_sem = semget(client_key, 1, IPC_CREAT | 0666);
+    int client_shm_id = create_shared_memory(CLIENT);
 
     print_info();
     
     while(1){
-        
+
 
 
 

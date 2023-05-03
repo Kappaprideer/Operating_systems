@@ -20,15 +20,9 @@ int main(){
     char* buffor = calloc(BUFF, sizeof(char));
     size_t size;
 
-    while(strcmp(buffor,"quit\n") != 0 ){
-        getline(&buffor, &size, stdin);
-
-        
-
-
-
-    }
-
+    key_t clients_shm_key = ftok(SHM_CLIENTS, CLIENT);
+    int client_shm_id = shmget(client_shm_id, 0, IPC_CREAT | 0666);
+    
     free(buffor);
     return 0;
 }
