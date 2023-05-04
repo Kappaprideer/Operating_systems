@@ -25,43 +25,43 @@ int main(int arg, char** args){
         
         sem_info.sem_op = 0;
         semop(sem_id, &sem_info, 1);
+        if(salon->free_chairs>0){
 
-        char hairstyle_name[30];
-        int client = sem_num;
+            salon->free_chairs--;
 
-        switch (salon->queue[client])
-        {
-        case SHORT:
-            snprintf(hairstyle_name, 30, "%s", "SHORT");
-            break;
-        case LONG:
-            snprintf(hairstyle_name, 30, "%s", "LONG");
-            break;
-        case FRESH:
-            snprintf(hairstyle_name, 30, "%s", "FRESH");
-            break;
-        case STYLED:
-            snprintf(hairstyle_name, 30, "%s", "STYLED");
-            break;
-        case NEW_FRESH_STYLED:
-            snprintf(hairstyle_name, 30, "%s", "NEW FRESH STYLED");
-            break;
+            char hairstyle_name[30];
+            switch (salon->barber[sem_num])
+            {
+            case SHORT:
+                snprintf(hairstyle_name, 30, "%s", "SHORT");
+                break;
+            case LONG:
+                snprintf(hairstyle_name, 30, "%s", "LONG");
+                break;
+            case FRESH:
+                snprintf(hairstyle_name, 30, "%s", "FRESH");
+                break;
+            case STYLED:
+                snprintf(hairstyle_name, 30, "%s", "STYLED");
+                break;
+            case NEW_FRESH_STYLED:
+                snprintf(hairstyle_name, 30, "%s", "NEW FRESH STYLED");
+                break;
+            }
+
+            printf("-- BARBER NUM: %d IS DOING: %s \n", sem_num, hairstyle_name);
+
+            sleep(salon->barber[sem_num]);
+            
+            printf("-- BARBER NUM: %d DONE %s\n", sem_num, hairstyle_name);
+
+            salon->free_barbers++;
+            salon->free_chairs++;
+            salon->barber[sem_num] = FALSE;
+
+            sem_info.sem_op = 1;
+            semop(sem_id, &sem_info, 1);
         }
-
-        printf("-- BARBER NUM: %d IS DOING: %s \n", sem_num, hairstyle_name);
-
-        sleep(salon->queue[client]);
-        
-        printf("-- BARBER NUM: %d DONE %s\n", sem_num, hairstyle_name);
-
-        // salon->currently_in_queue--;
-        salon->free_barbers++;
-        salon->free_chairs++;
-        salon->barber[sem_num] = FALSE;
-
-        sem_info.sem_op = 1;
-        semop(sem_id, &sem_info, 1);
-
     }
 
     return 0;

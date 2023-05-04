@@ -9,9 +9,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define MAX_BARBERS 6
-#define MAX_CHAIRS 5
-#define MAX_QUEUE 3
+#define MAX_BARBERS 5
+#define MAX_CHAIRS 3
+#define MAX_QUEUE 2
 
 #define SIMULATION 0
 
@@ -31,15 +31,20 @@
 #define SIZE sizeof(barber_shop)
 
 typedef struct{
+
     int new_client;
+    int new_hairstyle;
+
     int currently_in_queue;
     int queue_at;
+
     int free_barbers;
+    int barber_index;
     int free_chairs;
 
-    int queue[MAX_QUEUE];
+    int queue[MAX_QUEUE+MAX_BARBERS];
     int barber[MAX_BARBERS];
-    int chairs[MAX_CHAIRS];
+    
 } barber_shop;
 
 int get_semaphore();

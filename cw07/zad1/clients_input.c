@@ -22,9 +22,7 @@ void sigint_handler(){
 
 void add_client_to_queue(barber_shop* salon, int hairstyle){
     salon->new_client = ++client_num;
-    salon->currently_in_queue++;
-    salon->queue[salon->queue_at] = hairstyle;
-    salon->queue_at = (salon->queue_at+1)%MAX_QUEUE;
+    salon->new_hairstyle = hairstyle;
 }
 
 int main(){

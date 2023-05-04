@@ -58,7 +58,7 @@ int create_shared_memory(){
 
     for(int index = 0; index<MAX_QUEUE; index++)    barber_shop->queue[index] = FALSE;
     for(int index = 0; index<MAX_BARBERS; index++)    barber_shop->barber[index] = FALSE;
-    for(int index = 0; index<MAX_CHAIRS; index++)    barber_shop->chairs[index] = FALSE;
+    // for(int index = 0; index<MAX_CHAIRS; index++)    barber_shop->chairs[index] = FALSE;
 
     return shared_memory_id;
 }
@@ -106,39 +106,37 @@ int main(){
     
     print_info(barber_shop);
 
-    while(1){
+    while(TRUE){
 
         if(barber_shop->new_client != FALSE){
             printf("CLIENT NUM: %d GOES TO QUEUE\n", barber_shop->new_client);
-            barber_shop->new_client = FALSE;
-        }
-
-        // jezeli ktos jest w kolejce
-        if(barber_shop->currently_in_queue>0){
-            // i jest wolny fotel
-            if(barber_shop->free_chairs>0){
-                // znalezc wolnego barbera, ktory nic nie robi
-                int free_barber;
-                
-                barber_shop->free_barbers--;
-                barber_shop->free_chairs--;
-
+            
+            if(barber_shop->free_barbers>0 && barber_shop->currently_in_queue<MAX_QUEUE){
                 for(int index=0; index<MAX_BARBERS; index++){
                     if(barber_shop->barber[index] == FALSE){
-                        free_barber = index;
-                        int queue_index = barber_shop->queue_at -1 < 0 ? MAX_BARBERS-1 : barber_shop->queue_at -1;
-                        barber_shop->barber[index] = barber_shop->queue[queue_index];
+                        barber_shop->free_barbers--;
+                        barber_shop->barber[index] = barber_shop->new_hairstyle;
+
+                        if(barber_shop->free_chairs <= 0){
+                            barber_shop->currently_in_queue++;
+                        }
+
+                        struct sembuf sem_info;
+                        sem_info.sem_num = index;
+                        sem_info.sem_op = -1;
+                        sem_info.sem_flg = 0;
+                        semop(sem_id, &sem_info, 1);
                         break;
                     }
                 }
-
-                struct sembuf sem_info;
-                sem_info.sem_num = free_barber;
-                sem_info.sem_op = -1;
-                sem_info.sem_flg = 0;
-                semop(sem_id, &sem_info, 1);
-                barber_shop->currently_in_queue--;
             }
+            else{
+                printf("CLIENT NUM: %d GOES TO QUEUE\n", barber_shop->new_client);
+                barber_shop->currently_in_queue++;
+                barber_shop->queue[barber_shop->queue_at] = barber_shop->new_hairstyle;
+                barber_shop->queue_at = (barber_shop->queue_at+1)%MAX_QUEUE;
+            }
+            barber_shop->new_client = FALSE;
         }
     }
 }
