@@ -165,15 +165,6 @@ void create_threads_and_allocate_memory(){
 
 void kill_threads_and_free_memory(){
     
-    // pthread_cancel(*santa_clause);
-    // for(int index=0; index<ELFS_COUNT; index++){
-    //     if(pthread_cancel(elfs[index]) != 0) fprintf(stderr, "Problem with canceling elf thread!\n");
-    // }
-
-    // for(int index=0; index<9; index++){
-    //     if(pthread_cancel(reindeers[index]) != 0) fprintf(stderr, "Problem with canceling reindeers thread!\n");
-    // }
-
     free(elfs);
     free(santa_clause);
     free(reindeers);
