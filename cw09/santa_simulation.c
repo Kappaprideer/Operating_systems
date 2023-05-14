@@ -5,11 +5,12 @@
 #include <signal.h>
 
 #define TRUE 1
-#define ELFS_COUNT 5
+#define ELFS_COUNT 10
 #define REINDEER_COUNT 9
 
 int elfs_waiting=0, reindeer_waiting=0, gifts_delivered=0;
 pthread_t *elfs, *santa_clause, *reindeers;
+
 pthread_mutex_t elfs_waiting_mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t reindeer_waiting_mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -19,21 +20,17 @@ pthread_cond_t wake_up_santa = PTHREAD_COND_INITIALIZER;
 pthread_cond_t elfs_problem_solved = PTHREAD_COND_INITIALIZER;
 pthread_cond_t reindeer_gifts_delivered = PTHREAD_COND_INITIALIZER;
 
-
-
-
 unsigned long elfs_queue[3];
 
 
 void* santa(void* arg){
     while(TRUE){
         
-        
+        pthread_mutex_lock(&elfs_waiting_mutex);
         while( elfs_waiting < 3 && reindeer_waiting < REINDEER_COUNT){
             pthread_cond_wait(&wake_up_santa, &elfs_waiting_mutex);
         }
-        
-        pthread_mutex_lock(&elfs_waiting_mutex);
+        printf("Mikolaj: budze sie\n");
         pthread_mutex_lock(&reindeer_waiting_mutex);
 
         if(elfs_waiting == 3){
@@ -44,18 +41,18 @@ void* santa(void* arg){
             pthread_mutex_lock(&elfs_waiting_mutex);
 
             elfs_waiting = 0;
-            gifts_delivered++;
-
             pthread_cond_broadcast(&elfs_problem_solved);
-
-            printf("Mikolaj: Zasypiam\n");
-            pthread_mutex_unlock(&elfs_waiting_mutex);
-            pthread_mutex_unlock(&reindeer_waiting_mutex);
         }
         if(reindeer_waiting == REINDEER_COUNT){
-
-
+            printf("Mikołaj: dostarczam zabawki\n");
+            sleep(rand()%3 + 2);
+            reindeer_waiting = 0;
+            gifts_delivered++;
+            pthread_cond_broadcast(&reindeer_gifts_delivered);
         }
+        printf("Mikolaj: Zasypiam\n");
+        pthread_mutex_unlock(&elfs_waiting_mutex);
+        pthread_mutex_unlock(&reindeer_waiting_mutex);
     }
     return NULL;
 }
@@ -77,8 +74,8 @@ void* elf(void* arg){
 
             if(elfs_waiting == 3) {
                 printf("Elf: wybudzam mikołaja, ID: %ld\n", pthread_self());
-                printf("Elf: Mikolaj rozwiazuje problem\n");
                 pthread_cond_broadcast(&wake_up_santa);
+                printf("Elf: Mikolaj rozwiazuje problem\n");
             }
 
             pthread_cond_wait(&elfs_problem_solved, &elfs_waiting_mutex);
@@ -110,7 +107,6 @@ void* reindeer(void* arg){
 
         pthread_mutex_unlock(&reindeer_waiting_mutex);
     }
-
     return NULL;
 }
 
